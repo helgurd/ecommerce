@@ -9,9 +9,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 
-def home(request):
-    return render(request, 'users/home.html')
-
 
 class RegisterView(View):
     form_class = RegisterForm
