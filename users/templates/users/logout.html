@@ -1,13 +1,14 @@
 {% extends "users/base.html" %}
 {% block title %}Logout{% endblock title %}
 {% block content %}
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
+    <br>
+    <div class="container my-5" style="width: 30rem; margin-top:30rem;">
+        <div class="">
         <h5 class="card-title">You have been logged out</h5>
         <p class="card-text">
-            Thanks for your time, contact me for any comments or suggestions using my email address.
+            Thanks for your time, Please come back again.
         </p>
-        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+        <br><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
         </div>
     </div>
 
