@@ -1,4 +1,5 @@
 #### ecommerce web application with stripe
+Ecommerce web application created with Javascript, Django, MySQL and Bootstrap
 ##### Requirements
 ```angular2html
 asgiref==3.5.0
@@ -21,5 +22,4 @@ social-auth-app-django==5.0.0
 social-auth-core==4.2.0
 sqlparse==0.4.2
 urllib3==1.26.8
-
 ```
