@@ -12,6 +12,9 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <title>{% block title %} {% endblock %} </title>
+    <style>
+       {% block css %} {% endblock %}
+    </style>
 </head>
 <body>
   <div class="">
@@ -25,9 +28,13 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ml-auto">
                   {% if user.is_authenticated %}
+                      <button type="button" class="btn btn-link mx-1 text-secondary" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Cart">  Cart(<span id="cart">0</span>)
+    </button>
                     <a href="{% url 'users-profile' %}" class="nav-item nav-link">Profile</a>
                     <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
                   {% else %}
+                      <button type="button" class="btn btn-link mx-1 text-secondary" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Cart">  Cart(<span id="cart">0</span>)
+    </button>
                     <a href="{% url 'login' %}" class="nav-item nav-link">Sign in</a>
                   {% endif %}
 
@@ -46,6 +53,7 @@
           </div>
         {% endif %}
         {% block content %}{% endblock %}
+      {%block js%} {% endblock %}
       </div>
     </div>
   </div>
