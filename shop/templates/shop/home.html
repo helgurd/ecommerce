@@ -35,27 +35,30 @@ padding-right: 0;
 {% endblock %}
 {% block body %}
 {% load static %}
-<div class="container">
     <!--Slideshow starts here -->
     <div class="row">
     {% for i in allProds %}
-        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="col-xs-3 col-sm-3 col-md-3 mb-5 pt-2 pt-2">
             <div class="card align-items-center" style="width: 18rem;">
-                <img src='/media/{{i.image}}' class="card-img-top" alt="...">
+                <img src='/media/{{i.image}}' class="card-img-top pt-4 pb-2" alt="..."  height="250px">
                 <div class="card-body">
                     <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
                     <h6 class="card-title" >Price : <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
-                    <span id="divpr{{i.id}}" class="divpr">
-                        <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
+
+
+                    {% if user.is_authenticated %}
+                      <span id="divpr{{i.id}}" class="divpr">
+                        <button id="pr{{i.id}}" class="btn btn-primary btn-sm cart">Add To Cart</button>
                     </span>
-                    <a href="/shop/products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-primary cart">QuickView</button></a>
+                  {% endif %}
+
+                    <a href="/shop/products/{{i.id}}"><button id="qv{{i.id}}" class="btn btn-outline-primary btn-sm cart">QuickView</button></a>
                 </div>
             </div>
         </div>
     {% endfor %}
 
     </div>
-</div>
 
 {% endblock %}
 {% block js %}

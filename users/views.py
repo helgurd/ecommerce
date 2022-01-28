@@ -5,9 +5,11 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
 from django.contrib.auth.decorators import login_required
-
+from django.http.response import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
-
+import stripe
+from django.conf import settings
 
 
 class RegisterView(View):

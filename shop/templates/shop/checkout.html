@@ -1,24 +1,59 @@
 {% extends 'shop/base.html' %}
+<meta charset="utf-8">
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+
+console.log("Sanity check!");
+
+// Get Stripe publishable key
+fetch("/config/")
+.then((result) => { return result.json(); })
+.then((data) => {
+  // Initialize Stripe.js
+  const stripe = Stripe(data.publicKey);
+
+  // Event handler
+  document.querySelector("#submitBtn").addEventListener("click", () => {
+    // Get Checkout Session ID
+    fetch("/create-checkout-session/")
+    .then((result) => { return result.json(); })
+    .then((data) => {
+      console.log(data);
+      // Redirect to Stripe Checkout
+      return stripe.redirectToCheckout({sessionId: data.sessionId})
+    })
+    .then((res) => {
+      console.log(res);
+    });
+  });
+});
+</script>
 {% block title%} Checkout - My Awesome Cart{% endblock %}
 {% block body %}
 <div class="container">
     <div class="col my-4">
-        <h2>Step 1 - My Awesome Cart Express Checkout - Review Your Cart Items</h2>
+        <h3>Step 1 - Checkout - Review Your Cart Items</h3>
         <div class="my-4">
             <ul class="list-group" id="items">
             </ul>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mt-3">
                     <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is 
-                    <b>Rs.<span id="totalPrice"></b> </span>
-                    Enter your details below & place your order. Thanks for
-                        using My Awesome Cart!</li>
+                    <b>$<span id="totalPrice"></b> </span>
+                    Enter your details below to place your order.</li>
                 </ol>
             </nav>
         </div>
     </div>
-    <div class="col my-4">
-        <h2>Step 2 - Enter Address & Other Details:</h2>
+    <br>
+ <section class="section">
+    <div class="container">
+      <button class="button is-primary" id="submitBtn">Purchase!</button>
+    </div>
+  </section>
+    <br>
+    <div class="col col-md-8 my-4">
+        <h3 class="my-4">Step 2 - Enter Address & Other Details:</h3>
         <form method="post" action="/shop/checkout/">
             {% csrf_token %}
             <input type="hidden" name="itemsJson" id="itemsJson">
@@ -60,7 +95,7 @@
                 <label for="inputZip">Phone Number</label>
                 <input type="tel" class="form-control" id="phone" name="phone">
             </div>
-            <button type="submit" class="btn btn-primary">Place Order</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-5">Place Order</button>
         </form>
     </div>
 </div>
